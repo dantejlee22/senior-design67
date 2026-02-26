@@ -123,8 +123,10 @@ void proceed_forward(uint16_t mm)
             left_set_forward(RUNNING_SPEED * AVERSION_FACTOR);
             right_set_forward(RUNNING_SPEED);
         }
-        else
+        else {
             right_set_forward(RUNNING_SPEED); // update the speed of the right motor
+            left_set_forward(RUNNING_SPEED);
+        }
         last_count_left = temp_left;
         last_count_right = temp_right;
     };

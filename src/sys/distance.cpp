@@ -1,13 +1,12 @@
 #include "distance.h"
-#include "../drv/vl53l0x.h"
-
-static distances_t distances;
+#include "../drv/ir_driver.h"
+#include <math.h>
 
 /// @brief configures distance sensors and relevant pins, boots sensors
 /// @param
 void setup_distance(void)
 {
-    setupVL53LOX(SENSOR_FORWARD, SENSOR_LEFT, SENSOR_RIGHT, SENSOR_FORWARD_LEFT);
+    ir_sensor_setup(LED_LEFT, SENSOR_LEFT, LED_FORWARD_LEFT, SENSOR_FORWARD_LEFT, LED_FORWARD_RIGHT, SENSOR_FORWARD_RIGHT, LED_RIGHT, SENSOR_RIGHT);
 }
 
 /// @brief
@@ -15,7 +14,9 @@ void setup_distance(void)
 /// @return right sensor measurement in mm
 uint16_t rightDistance(void)
 {
-    return distances.right;
+    uint16_t volt = right_voltage();
+    uint16_t millis = pow(volt/4751.13808,(1.0/-.606735));
+    return volt;
 }
 
 /// @brief
@@ -23,7 +24,9 @@ uint16_t rightDistance(void)
 /// @return left sensor measurement in mm
 uint16_t leftDistance(void)
 {
-    return distances.left;
+    uint16_t volt = left_voltage();
+    uint16_t millis = pow(volt/4375.04273,(1.0/-.594013));
+    return volt;
 }
 
 /// @brief
@@ -31,19 +34,15 @@ uint16_t leftDistance(void)
 /// @return (right ) forward sensor measurement in mm
 uint16_t forwardDistance(void)
 {
-    return distances.forward;
-}
-
-// refreshes all sensor measurements
-// call this every time you want to get new measurements
-// call once per cycle, not once per sensor per cycle (itll get tripped up if called too often)
-void distance_refresh(void)
-{
-    getMeasurements(&distances);
+    uint16_t volt = front_right_voltage();
+    uint16_t millis = pow(volt/3179.19145,(1.0/-.315761));
+    return volt;
 }
 
 // left forward sensor distance in mm
 uint16_t forwardLeftDistance(void)
 {
-    return distances.forward_left;
+    uint16_t volt = front_left_voltage();
+    uint16_t millis = pow(volt/2287.66907,(1.0/-.505933));
+    return volt;
 }

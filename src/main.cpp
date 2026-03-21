@@ -32,12 +32,13 @@ void loop()
   Serial.write(27);
   Serial.print("[H");
 
-  // call distance refresh every time you want a new set of measurements from the sensors
-  distance_refresh();
   // store current measurement from each sensor
   uint16_t right_dist = rightDistance();
+  vTaskDelay(10/portTICK_PERIOD_MS);
   uint16_t left_dist = leftDistance();
-  uint16_t forward_dist = forwardDistance();
+  //vTaskDelay(10/portTICK_PERIOD_MS);
+  uint16_t forward_dist = 0;//forwardDistance();
+  vTaskDelay(10/portTICK_PERIOD_MS);
   uint16_t forward_left_dist = forwardLeftDistance();
 
   // get current encoder counts, refreshes automatically unlike distance sensors

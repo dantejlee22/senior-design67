@@ -2,13 +2,12 @@
   "build": {
     "arduino": {
       "ldscript": "esp32s3_out.ld",
-      "partitions": "default_16MB.csv",
+      "partitions": "default_8MB.csv",
       "memory_type": "qio_opi"
     },
     "core": "esp32",
     "extra_flags": [
       "-DARDUINO_ESP32S3_DEV",
-      "-DBOARD_HAS_PSRAM",
       "-DARDUINO_USB_MODE=1",
       "-DARDUINO_USB_CDC_ON_BOOT=1"
     ],
@@ -40,14 +39,14 @@
     "arduino",
     "espidf"
   ],
-  "name": "ND EESD ESP32-S3-1 N16R8V (16 MB QD, 8MB PSRAM)",
+  "name": "ESP32-S3-WROOM-1-N8, TEAM 6.7 MHZ (8 MB QD)",
   "upload": {
-    "flash_size": "16MB",
+    "flash_size": "8MB",
     "maximum_ram_size": 327680,
     "maximum_size": 16777216,
     "require_upload_port": true,
     "speed": 921600
   },
   "url": "",
-  "vendor": "ND EESD"
+  "vendor": "TEAM 6.7 MHZ"
 }
